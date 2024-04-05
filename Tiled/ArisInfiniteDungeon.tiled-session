@@ -1,0 +1,44 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "dungeon/field.tmx",
+    "expandedProjectPaths": [
+        "dungeon",
+        "."
+    ],
+    "fileStates": {
+        "dungeon/dungeon-test.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "dungeon/field.tmx": {
+            "scale": 1.2171874999999999,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": -909.0629011553274,
+                "y": 80.10269576379974
+            }
+        }
+    },
+    "last.imagePath": "/Users/ryangiordano/Desktop/Projects/game-dev/aris-mystery-dungeon/Tiled/dungeon",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "openFiles": [
+        "dungeon/dungeon-test.tsx",
+        "dungeon/dungeon-test.tsx",
+        "dungeon/field.tmx"
+    ],
+    "project": "ArisInfiniteDungeon.tiled-project",
+    "recentFiles": [
+        "dungeon/dungeon-test.tsx",
+        "dungeon/field.tmx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}
