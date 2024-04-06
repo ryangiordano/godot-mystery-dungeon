@@ -3,9 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://dcsclht6ac6m2" path="res://Tiled/dungeon/test-tileset.png" id="1_1ru15"]
 [ext_resource type="PackedScene" uid="uid://bu3f6ooung5h7" path="res://Main/State/MainState.tscn" id="4_1ckjo"]
 [ext_resource type="Script" path="res://Main/Nodes/Critter/CritterController.gd" id="4_fo8w3"]
-[ext_resource type="PackedScene" uid="uid://dblqpijux3isl" path="res://Main/State/PlayerState.tscn" id="4_pwbf6"]
 [ext_resource type="PackedScene" uid="uid://ds341lh0xmcn5" path="res://Main/Nodes/Player.tscn" id="4_rybxa"]
 [ext_resource type="Script" path="res://Main/Behaviors/DirectionalMovement.gd" id="5_28f0d"]
+[ext_resource type="Script" path="res://Main/Behaviors/Controllers/PlayerController.gd" id="6_6apbx"]
 [ext_resource type="PackedScene" uid="uid://vxyirgqmmbjw" path="res://Main/Nodes/npc.tscn" id="6_8xemq"]
 [ext_resource type="Script" path="res://Main/Behaviors/Follow.gd" id="7_6xojm"]
 [ext_resource type="Script" path="res://Main/State/MainController.gd" id="8_5hvty"]
@@ -1934,25 +1934,23 @@ layer_0/tile_data = PackedInt32Array(0, 393216, 2, 1, 393216, 2, 65535, 65536, 2
 
 [node name="Critter" parent="." instance=ExtResource("6_8xemq")]
 position = Vector2(51, 6)
+script = ExtResource("4_fo8w3")
 
 [node name="Follow" type="Node2D" parent="Critter"]
 position = Vector2(-1, 0)
 script = ExtResource("7_6xojm")
 
-[node name="CritterController" type="Node" parent="Critter"]
-script = ExtResource("4_fo8w3")
-
 [node name="Player" parent="." instance=ExtResource("4_rybxa")]
 position = Vector2(-8, 0)
+collision_mask = 12
+script = ExtResource("6_6apbx")
+collected_companion = null
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(8, 0)
 rotation = 3.14159
 scale = Vector2(101.15, -1088.63)
 zoom = Vector2(4, 4)
-
-[node name="PlayerController" parent="Player" instance=ExtResource("4_pwbf6")]
-collected_companion = null
 
 [node name="Movement" type="Node" parent="Player"]
 script = ExtResource("5_28f0d")

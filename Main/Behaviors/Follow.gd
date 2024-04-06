@@ -9,13 +9,13 @@ var target_position: Vector2
 
 func _ready():
 	# TODO: We probably want to hook up this to a central hub like game state, rather than needing to hook up directly to the player. For now this works though.
-	get_node("/root/Main/Player/PlayerController").connect("companion_collected", _on_companion_collected)
+	get_node("/root/Main/Player").connect("companion_collected", _on_companion_collected)
 
 func _on_companion_collected(node_path: NodePath):
 	if !target:
 		target = node_path
 
-func _process(delta):
+func _physics_process(delta):
 	if target:
 		var body = get_parent()
 		var target_node = get_node(target)
@@ -30,5 +30,9 @@ func _process(delta):
 
 			var move_to = target_node.global_position + target_position
 			var direction: Vector2 = (move_to - body.global_position).normalized()
+			body.velocity = direction * speed
+			body.move_and_slide()
+		else:
+			body.velocity = Vector2.ZERO
+			# body.global_position += direction * speed * delta
 			
-			body.global_position += direction * speed * delta

@@ -9,9 +9,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	var bodies = get_parent().get_node("Area2D").get_overlapping_bodies()
+	var bodies = get_node("Area2D").get_overlapping_bodies()
 	if bodies:
 		for body in bodies:
 			if body.collision_layer == 2:
-				emit_signal("companion_collected", get_parent().get_path())
+				emit_signal("companion_collected", get_path())
 					
