@@ -1951,7 +1951,8 @@ rotation = 3.14159
 scale = Vector2(101.15, -1088.63)
 zoom = Vector2(4, 4)
 
-[node name="PlayerState" parent="Player" instance=ExtResource("4_pwbf6")]
+[node name="PlayerController" parent="Player" instance=ExtResource("4_pwbf6")]
+collected_companion = null
 
 [node name="Movement" type="Node" parent="Player"]
 script = ExtResource("5_28f0d")

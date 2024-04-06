@@ -7,9 +7,13 @@ var target_position: Vector2
 @export var speed = 70 # Define the speed at which the node will follow the target
 @export var radius = 35 # Define the radius of the circle around the target
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	# TODO: We probably want to hook up this to a central hub like game state, rather than needing to hook up directly to the player. For now this works though.
+	get_node("/root/Main/Player/PlayerController").connect("companion_collected", _on_companion_collected)
+
+func _on_companion_collected(node_path: NodePath):
+	if !target:
+		target = node_path
 
 func _process(delta):
 	if target:
