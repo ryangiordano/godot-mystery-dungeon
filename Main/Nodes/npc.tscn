@@ -26,7 +26,9 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_twdge"]
 
-[node name="NPC" type="CharacterBody2D"]
+[node name="Critter" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 9
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -17)
@@ -41,5 +43,5 @@ libraries = {
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -16)
 shape = SubResource("RectangleShape2D_twdge")
-disabled = true

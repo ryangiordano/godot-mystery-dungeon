@@ -48,6 +48,13 @@ switch_power={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="player"
+2d_physics/layer_2="critter"
+2d_physics/layer_3="coins"
+2d_physics/layer_4="walls"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

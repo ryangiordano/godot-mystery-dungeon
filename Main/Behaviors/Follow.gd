@@ -9,21 +9,22 @@ var target_position: Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print(get_node(target))
+	pass
 
 func _process(delta):
+	if target:
+		var body = get_parent()
+		var target_node = get_node(target)
+		current_cooldown = max(current_cooldown - delta, 0)
+		
+		var within_range = target_node.global_position.distance_to(get_parent().global_position) < radius
+		if target_node and !within_range:
+			if current_cooldown <= 0 or !target_position:
+				current_cooldown = cooldown_seconds
+				var angle = randf_range(0, 2 * PI) # Get a random angle
+				target_position = Vector2(cos(angle), sin(angle)) * radius # Calculate the offset from the target
 
-	var target_node = get_node(target)
-	current_cooldown = max(current_cooldown - delta, 0)
-	print(current_cooldown)
-	var within_range = target_node.global_position.distance_to(get_parent().global_position) < radius
-	if target_node and !within_range:
-		if current_cooldown <= 0 or !target_position:
-			current_cooldown = cooldown_seconds
-			var angle = randf_range(0, 2 * PI) # Get a random angle
-			target_position = Vector2(cos(angle), sin(angle)) * radius # Calculate the offset from the target
-
-		var t = target_node.global_position + target_position # Apply the offset to the target's position
-		var direction: Vector2 = (t - get_parent().global_position).normalized()
-		get_parent().global_position += direction * speed * delta
-pass # Replace with function body.
+			var move_to = target_node.global_position + target_position
+			var direction: Vector2 = (move_to - body.global_position).normalized()
+			
+			body.global_position += direction * speed * delta

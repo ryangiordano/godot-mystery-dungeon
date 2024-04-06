@@ -1,12 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://j4crjcvj4su0"]
+[gd_scene load_steps=15 format=3 uid="uid://j4crjcvj4su0"]
 
 [ext_resource type="Texture2D" uid="uid://dcsclht6ac6m2" path="res://Tiled/dungeon/test-tileset.png" id="1_1ru15"]
 [ext_resource type="PackedScene" uid="uid://bu3f6ooung5h7" path="res://Main/State/MainState.tscn" id="4_1ckjo"]
+[ext_resource type="Script" path="res://Main/Nodes/Critter/CritterController.gd" id="4_fo8w3"]
 [ext_resource type="PackedScene" uid="uid://dblqpijux3isl" path="res://Main/State/PlayerState.tscn" id="4_pwbf6"]
 [ext_resource type="PackedScene" uid="uid://ds341lh0xmcn5" path="res://Main/Nodes/Player.tscn" id="4_rybxa"]
-[ext_resource type="Script" path="res://Main/Behaviors/SideMovement.gd" id="5_28f0d"]
+[ext_resource type="Script" path="res://Main/Behaviors/DirectionalMovement.gd" id="5_28f0d"]
 [ext_resource type="PackedScene" uid="uid://vxyirgqmmbjw" path="res://Main/Nodes/npc.tscn" id="6_8xemq"]
 [ext_resource type="Script" path="res://Main/Behaviors/Follow.gd" id="7_6xojm"]
+[ext_resource type="Script" path="res://Main/State/MainController.gd" id="8_5hvty"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_geyxp"]
 texture = ExtResource("1_1ru15")
@@ -1933,13 +1935,15 @@ layer_0/tile_data = PackedInt32Array(0, 393216, 2, 1, 393216, 2, 65535, 65536, 2
 [node name="Critter" parent="." instance=ExtResource("6_8xemq")]
 position = Vector2(51, 6)
 
-[node name="FollowBehavior" type="Node2D" parent="Critter"]
+[node name="Follow" type="Node2D" parent="Critter"]
 position = Vector2(-1, 0)
 script = ExtResource("7_6xojm")
 
+[node name="CritterController" type="Node" parent="Critter"]
+script = ExtResource("4_fo8w3")
+
 [node name="Player" parent="." instance=ExtResource("4_rybxa")]
 position = Vector2(-8, 0)
-script = ExtResource("5_28f0d")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(8, 0)
@@ -1949,9 +1953,12 @@ zoom = Vector2(4, 4)
 
 [node name="PlayerState" parent="Player" instance=ExtResource("4_pwbf6")]
 
-[node name="MainState" parent="." instance=ExtResource("4_1ckjo")]
+[node name="Movement" type="Node" parent="Player"]
+script = ExtResource("5_28f0d")
 
 [node name="Platform" type="StaticBody2D" parent="."]
+collision_layer = 8
+collision_mask = 0
 physics_material_override = SubResource("PhysicsMaterial_gsqlt")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Platform"]
@@ -1961,3 +1968,8 @@ mesh = SubResource("QuadMesh_bycjq")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
 position = Vector2(0, 95)
 shape = SubResource("RectangleShape2D_ufwqp")
+
+[node name="MainController" type="Node" parent="."]
+script = ExtResource("8_5hvty")
+
+[node name="MainState" parent="." instance=ExtResource("4_1ckjo")]
