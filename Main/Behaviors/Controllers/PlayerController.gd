@@ -1,7 +1,6 @@
-extends Node2D
+extends CharacterBody2D
 
 @export var collected_companion: NodePath
-signal companion_collected(path: NodePath)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,5 +12,10 @@ func _process(_delta):
 	if bodies:
 		for body in bodies:
 			if body.collision_layer == 2:
-				emit_signal("companion_collected", get_path())
+				var main_controller = get_node("/root/Main/MainController")
+
+				main_controller.emit_signal("critter_collected",
+					get_path(),
+					body.get_path(),
+				)
 					

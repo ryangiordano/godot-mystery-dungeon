@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var target: NodePath
+var target: NodePath
 @export var cooldown_seconds: float = 1.0
 var current_cooldown: float = 0.0
 var target_position: Vector2
@@ -8,14 +8,19 @@ var target_position: Vector2
 @export var radius = 35 # Define the radius of the circle around the target
 
 func _ready():
-	# TODO: We probably want to hook up this to a central hub like game state, rather than needing to hook up directly to the player. For now this works though.
-	get_node("/root/Main/Player").connect("companion_collected", _on_companion_collected)
+	pass
 
-func _on_companion_collected(node_path: NodePath):
-	if !target:
-		target = node_path
+func get_target() -> NodePath:
+	print("getting target")
+
+	return target
+
+func set_target(new_target: NodePath) -> void:
+	print("setting new target", new_target)
+	target = new_target
 
 func _physics_process(delta):
+
 	if target:
 		var body = get_parent()
 		var target_node = get_node(target)

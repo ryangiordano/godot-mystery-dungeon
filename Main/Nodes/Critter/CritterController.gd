@@ -1,12 +1,21 @@
 # Manages critter behaviors as it relates to the global game state
 extends CharacterBody2D
 
-# Called when the node enters the scene tree for the first time.
+func _on_critter_collected(player_path, critter_path):
+	if critter_path == get_path():
+
+		var critter = get_node(critter_path)
+		
+		if !critter.get("is_following"):
+			critter.set("is_following", true)
+			critter.get_node("Follow").set("target", player_path)
+
 func _ready():
-	pass # Replace with function body.
+	var main_controller = get_node("/root/Main/MainController")
+	main_controller.connect("critter_collected", _on_critter_collected)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _physics_process(_delta):
 		# var velocity = Vector2() # Define a 2D vector for velocity
 	var anim = get_node("AnimationPlayer") # Get the AnimatedSprite node
 	var sprite = get_node("Sprite2D") # Get the AnimatedSprite node
