@@ -11,16 +11,13 @@ func _ready():
 	pass
 
 func get_target() -> NodePath:
-	print("getting target")
-
 	return target
 
 func set_target(new_target: NodePath) -> void:
-	print("setting new target", new_target)
 	target = new_target
 
 func _physics_process(delta):
-
+	
 	if target:
 		var body = get_parent()
 		var target_node = get_node(target)

@@ -22,5 +22,4 @@ func _process(_delta):
 	if collected_critters.size() >= critters_to_collect:
 		# We have collected all the critters
 		# Emit a signal to the parent node
-		print("All critters collected")
-	pass
+		pass

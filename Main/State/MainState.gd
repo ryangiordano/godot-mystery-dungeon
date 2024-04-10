@@ -10,5 +10,4 @@ func _init():
 		queue_free()
 
 static func get_instance():
-	print("get_instance")
 	return _instance

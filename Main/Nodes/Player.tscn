@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ds341lh0xmcn5"]
+[gd_scene load_steps=12 format=3 uid="uid://ds341lh0xmcn5"]
 
 [ext_resource type="Texture2D" uid="uid://cdjhcexq7r2lf" path="res://assets/sprites/aris/aris-Sheet.png" id="1_seuhl"]
 
@@ -179,9 +179,6 @@ _data = {
 "rotate-right": SubResource("Animation_2uy4t")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_p1juq"]
-radius = 22.0206
-
 [node name="CharacterBody2D" type="CharacterBody2D"]
 position = Vector2(4.89777e-14, 0.0470567)
 collision_mask = 14
@@ -206,10 +203,3 @@ root_node = NodePath("../MovementAnimationPlayer")
 libraries = {
 "": SubResource("AnimationLibrary_38qc2")
 }
-
-[node name="Area2D" type="Area2D" parent="."]
-collision_mask = 14
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -3)
-shape = SubResource("CircleShape2D_p1juq")
