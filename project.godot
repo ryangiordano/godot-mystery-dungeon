@@ -59,6 +59,7 @@ switch_power={
 2d_physics/layer_2="critter"
 2d_physics/layer_3="coins"
 2d_physics/layer_4="walls"
+2d_physics/layer_5="goals"
 
 [rendering]
 

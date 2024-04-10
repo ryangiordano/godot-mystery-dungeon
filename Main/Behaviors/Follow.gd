@@ -7,18 +7,8 @@ var target_position: Vector2
 @export var speed = 70 # Define the speed at which the node will follow the target
 @export var radius = 35 # Define the radius of the circle around the target
 
-func _ready():
-	pass
-
-func get_target() -> NodePath:
-	return target
-
-func set_target(new_target: NodePath) -> void:
-	target = new_target
-
 func _physics_process(delta):
-	
-	if target:
+	if target and target != NodePath():
 		var body = get_parent()
 		var target_node = get_node(target)
 		current_cooldown = max(current_cooldown - delta, 0)
@@ -33,8 +23,8 @@ func _physics_process(delta):
 			var move_to = target_node.global_position + target_position
 			var direction: Vector2 = (move_to - body.global_position).normalized()
 			body.velocity = direction * speed
-			body.move_and_slide()
-		else:
-			body.velocity = Vector2.ZERO
-			# body.global_position += direction * speed * delta
+			return body.move_and_slide()
+		
+	get_parent().velocity = Vector2.ZERO
+	# body.global_position += direction * speed * delta
 			

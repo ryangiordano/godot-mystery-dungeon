@@ -2,6 +2,7 @@ extends Node
 
 var collected_critters: Array[NodePath] = []
 signal critter_collected(player: NodePath, critter: NodePath)
+signal critter_saved(critter: NodePath)
 
 @export var critters_to_collect: int = 3;
 
