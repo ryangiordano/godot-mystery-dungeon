@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://j4crjcvj4su0"]
+[gd_scene load_steps=17 format=3 uid="uid://j4crjcvj4su0"]
 
 [ext_resource type="Texture2D" uid="uid://dcsclht6ac6m2" path="res://Tiled/dungeon/test-tileset.png" id="1_1ru15"]
 [ext_resource type="PackedScene" uid="uid://bu3f6ooung5h7" path="res://Main/State/MainState.tscn" id="4_1ckjo"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" path="res://Main/State/MainController.gd" id="8_5hvty"]
 [ext_resource type="Script" path="res://Main/Behaviors/CritterCollector.gd" id="10_ppudo"]
 [ext_resource type="PackedScene" uid="uid://be06l4pdotoo3" path="res://Main/Nodes/Goal/Goal.tscn" id="11_mn4ra"]
+[ext_resource type="Script" path="res://Main/Behaviors/MainCamera.gd" id="12_qxm24"]
+[ext_resource type="PackedScene" uid="uid://bfxwqvyonoo2j" path="res://Main/Nodes/Ander.tscn" id="13_2ag3r"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_geyxp"]
 texture = ExtResource("1_1ru15")
@@ -5758,10 +5760,12 @@ layer_0/tile_data = PackedInt32Array(0, 131072, 10, 1, 0, 10, 65535, 65536, 10, 
 
 [node name="MainController" type="Node" parent="."]
 script = ExtResource("8_5hvty")
+critters_to_collect = null
+players = Array[NodePath]([NodePath("../Aris"), NodePath("../Ander")])
 
 [node name="MainState" parent="." instance=ExtResource("4_1ckjo")]
 
-[node name="Critter" parent="." instance=ExtResource("6_8xemq")]
+[node name="Critter" parent="." groups=["critters"] instance=ExtResource("6_8xemq")]
 position = Vector2(144, 20)
 script = ExtResource("4_fo8w3")
 
@@ -5769,7 +5773,7 @@ script = ExtResource("4_fo8w3")
 position = Vector2(-1, 0)
 script = ExtResource("7_6xojm")
 
-[node name="Critter2" parent="." instance=ExtResource("6_8xemq")]
+[node name="Critter2" parent="." groups=["critters"] instance=ExtResource("6_8xemq")]
 position = Vector2(187, -110)
 script = ExtResource("4_fo8w3")
 
@@ -5777,7 +5781,7 @@ script = ExtResource("4_fo8w3")
 position = Vector2(-1, 0)
 script = ExtResource("7_6xojm")
 
-[node name="Critter3" parent="." instance=ExtResource("6_8xemq")]
+[node name="Critter3" parent="." groups=["critters"] instance=ExtResource("6_8xemq")]
 position = Vector2(-153, -108)
 script = ExtResource("4_fo8w3")
 
@@ -5785,28 +5789,46 @@ script = ExtResource("4_fo8w3")
 position = Vector2(-1, 0)
 script = ExtResource("7_6xojm")
 
-[node name="Player" parent="." instance=ExtResource("4_rybxa")]
-position = Vector2(-8, 0)
-collision_mask = 8
-script = ExtResource("6_6apbx")
+[node name="Goal" parent="." instance=ExtResource("11_mn4ra")]
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(8, 0)
+[node name="MainCamera" type="Camera2D" parent="."]
 rotation = 3.14159
 scale = Vector2(101.15, -1088.63)
 zoom = Vector2(4, 4)
+script = ExtResource("12_qxm24")
 
-[node name="Movement" type="Node" parent="Player"]
+[node name="Aris" parent="." instance=ExtResource("4_rybxa")]
+position = Vector2(-8, 0)
+collision_mask = 8
+script = ExtResource("6_6apbx")
+active = true
+
+[node name="Movement" type="Node" parent="Aris"]
 script = ExtResource("5_28f0d")
 
-[node name="Collector" type="Node2D" parent="Player"]
+[node name="Collector" type="Node2D" parent="Aris"]
 script = ExtResource("10_ppudo")
 
-[node name="Area2D" type="Area2D" parent="Player/Collector"]
+[node name="Area2D" type="Area2D" parent="Aris/Collector"]
 collision_mask = 6
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Collector/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Aris/Collector/Area2D"]
 position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_a0gny")
 
-[node name="Goal" parent="." instance=ExtResource("11_mn4ra")]
+[node name="Ander" parent="." instance=ExtResource("13_2ag3r")]
+position = Vector2(-110, 2)
+script = ExtResource("6_6apbx")
+
+[node name="Movement" type="Node" parent="Ander"]
+script = ExtResource("5_28f0d")
+
+[node name="Collector" type="Node2D" parent="Ander"]
+script = ExtResource("10_ppudo")
+
+[node name="Area2D" type="Area2D" parent="Ander/Collector"]
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ander/Collector/Area2D"]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_a0gny")

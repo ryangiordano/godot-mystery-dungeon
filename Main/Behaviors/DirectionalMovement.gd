@@ -12,8 +12,10 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var has_rotated = false
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var body = get_parent()
+	if !body.get('active'):
+		return
 	var sprite = body.get_node(SPRITE)
 	var rotate_anim = body.get_node(ROTATE_ANIM)
 	var movement_anim = body.get_node(MOVEMENT_ANIM)
